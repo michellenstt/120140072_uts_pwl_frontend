@@ -5,7 +5,10 @@ const Card = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-md p-2">
+    <div
+      className="bg-white rounded-md p-2 cursor-pointer"
+      onClick={() => navigate("/detail/1")}
+    >
       <div className="w-full h-48 bg-gray-300 rounded-md"></div>
       <h1 className="text-lg font-semibold mt-2">Nama Produk</h1>
       <p className="text-sm">Rp. 120.000</p>
@@ -13,7 +16,8 @@ const Card = () => {
       <div className="flex gap-3 justify-center mt-5 mb-3">
         <Button
           className={"bg-amber-500"}
-          onClick={() => {
+          onClick={(event) => {
+            event.stopPropagation();
             navigate("/edit/1");
           }}
         >

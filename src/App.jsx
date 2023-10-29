@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import EditPage from "./pages/EditPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import DetailPage from "./pages/DetailPage";
 
 const App = () => {
   const routes = createBrowserRouter(
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="*" element={<div>404</div>} />
         </Route>
       </>
