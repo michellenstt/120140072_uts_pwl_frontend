@@ -10,7 +10,7 @@ const TambahPage = () => {
 
   return (
     <div>
-      <TitleWithBack title={"Edit Produk"} />
+      <TitleWithBack title={"Tambah Produk"} />
 
       <form className="mt-5 max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <label className="block">Nama Produk</label>

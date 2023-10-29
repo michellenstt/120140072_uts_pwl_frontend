@@ -7,6 +7,7 @@ import TambahPage from "./pages/TambahPage";
 import { RouterProvider } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import EditPage from "./pages/EditPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const App = () => {
   const routes = createBrowserRouter(
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<Beranda />} />
           <Route path="/tambah" element={<TambahPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/edit/:id" element={<EditPage />} />
           <Route path="*" element={<div>404</div>} />
         </Route>

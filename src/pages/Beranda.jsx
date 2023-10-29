@@ -1,13 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import * as Icons from "react-icons/fa";
 
 const Beranda = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Produk Kami</h1>
-        <Button className={"flex items-center gap-2"}>
+        <Button
+          className={"flex items-center gap-2"}
+          onClick={() => navigate("/tambah")}
+        >
           Tambah Produk
           <Icons.FaPlus />
         </Button>
