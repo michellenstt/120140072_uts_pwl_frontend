@@ -1,29 +1,50 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { axiosInstance } from "../utils/axios";
 
-const Card = () => {
+const Card = ({ id, nama, harga, stok, gambar }) => {
   const navigate = useNavigate();
+
+  const handleDelete = async (event) => {
+    event.stopPropagation();
+
+    try {
+      await axiosInstance.delete(`/api/v1/produk?id=${id}`);
+
+      alert("Berhasil menghapus produk");
+      navigate("/");
+    } catch (error) {
+      alert("Gagal menghapus produk");
+    }
+  };
 
   return (
     <div
       className="bg-white rounded-md p-2 cursor-pointer"
-      onClick={() => navigate("/detail/1")}
+      onClick={() => navigate(`/detail/${id}`)}
     >
-      <div className="w-full h-48 bg-gray-300 rounded-md"></div>
-      <h1 className="text-lg font-semibold mt-2">Nama Produk</h1>
-      <p className="text-sm">Rp. 120.000</p>
-      <p className="text-sm mt-5">Stok : 12</p>
+      <div className="w-full h-48 bg-gray-300 rounded-md">
+        <img
+          src={gambar}
+          alt={nama}
+          className="w-full h-full object-cover rounded-md"
+        />
+      </div>
+      <h1 className="text-lg font-semibold mt-2">{nama}</h1>
+      <p className="text-sm">Rp. {harga}</p>
+      <p className="text-sm mt-5">Stok : {stok}</p>
       <div className="flex gap-3 justify-center mt-5 mb-3">
         <Button
-          className={"bg-amber-500"}
+          className={"bg-yellow-500"}
           onClick={(event) => {
             event.stopPropagation();
-            navigate("/edit/1");
+            navigate(`/edit/${id}`);
           }}
         >
           <p>Edit</p>
         </Button>
-        <Button className={"bg-red-500"}>
+        <Button className={"bg-red-500"} onClick={handleDelete}>
           <p>Hapus</p>
         </Button>
         <Button>

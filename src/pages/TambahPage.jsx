@@ -1,11 +1,30 @@
 import { useForm } from "react-hook-form";
 import TitleWithBack from "../components/TitleWithBack";
+import { axiosInstance } from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const TambahPage = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await axiosInstance.post("/api/v1/produk", {
+        nama: data.nama,
+        harga: Number(data.harga),
+        stok: Number(data.stok),
+        deskripsi: data.deskripsi,
+        gambar: data.gambar,
+      });
+
+      console.log(res);
+
+      alert("Berhasil tambah produk");
+      navigate("/");
+    } catch (error) {
+      alert("Gagal tambah produk");
+    }
   };
 
   return (
