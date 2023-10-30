@@ -2,9 +2,12 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { axiosInstance } from "../utils/axios";
+import { useCartContext } from "../hooks/useCartContext";
 
 const Card = ({ id, nama, harga, stok, gambar }) => {
   const navigate = useNavigate();
+
+  const { addItemToCart } = useCartContext();
 
   const handleDelete = async (event) => {
     event.stopPropagation();
@@ -47,7 +50,12 @@ const Card = ({ id, nama, harga, stok, gambar }) => {
         <Button className={"bg-red-500"} onClick={handleDelete}>
           <p>Hapus</p>
         </Button>
-        <Button>
+        <Button
+          onClick={(event) => {
+            event.stopPropagation();
+            addItemToCart({ id, nama, harga, stok, gambar });
+          }}
+        >
           <p>Beli</p>
         </Button>
       </div>

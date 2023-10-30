@@ -1,8 +1,14 @@
 import * as Icons from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../hooks/useCartContext";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const { cartItems } = useCartContext();
+  const totalQuantity = cartItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   return (
     <div className="p-5 flex items-center justify-between bg-blue-500 text-white rounded-md mt-5">
@@ -20,7 +26,11 @@ const Header = () => {
           navigate("/cart");
         }}
       >
-        100
+        {cartItems.length > 0 && (
+          <div className="bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+            {totalQuantity}
+          </div>
+        )}
         <Icons.FaShoppingCart />
       </div>
     </div>

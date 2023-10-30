@@ -1,6 +1,9 @@
 import TitleWithBack from "../components/TitleWithBack";
+import { useCartContext } from "../hooks/useCartContext";
 
 const CheckoutPage = () => {
+  const { cartItems } = useCartContext();
+
   return (
     <div>
       <TitleWithBack title={"Checkout"} />
@@ -14,14 +17,23 @@ const CheckoutPage = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          <tr>
-            <td>Produk 1</td>
-            <td>10000</td>
-            <td>2</td>
-            <td>20000</td>
-          </tr>
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td>{item.nama}</td>
+              <td>Rp. {item.harga}</td>
+              <td>{item.quantity}</td>
+              <td>Rp. {item.harga * item.quantity}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
+
+      <div className="mt-5 text-center ">
+        <p>
+          Total : Rp.{" "}
+          {cartItems.reduce((acc, curr) => acc + curr.harga * curr.quantity, 0)}
+        </p>
+      </div>
     </div>
   );
 };
